@@ -1,7 +1,7 @@
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
 
 public class RankCalculator {
 
@@ -85,6 +85,7 @@ public class RankCalculator {
             }
         });
 
+        //:)
         // Set the frame to be visible
         frame.setVisible(true);
     }
