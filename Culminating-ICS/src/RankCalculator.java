@@ -6,7 +6,36 @@ import java.awt.event.ActionListener;
 public class RankCalculator {
 
     public static void main(String[] args) {
-        // Create the frame
+        // Create the start frame
+        JFrame startFrame = new JFrame("WAR GRIND");
+        startFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        startFrame.setSize(400, 200);
+        startFrame.setLayout(new BorderLayout());
+
+        // Create the start menu components
+        JLabel titleLabel = new JLabel("WAR GRIND", SwingConstants.CENTER);
+        titleLabel.setFont(new Font("Serif", Font.BOLD, 24));
+        JButton startButton = new JButton("Start");
+
+        startFrame.add(titleLabel, BorderLayout.CENTER);
+        startFrame.add(startButton, BorderLayout.SOUTH);
+
+        // Add action listener to the start button
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Hide the start frame and show the main frame
+                startFrame.setVisible(false);
+                showMainFrame();
+            }
+        });
+
+        // Set the start frame to be visible
+        startFrame.setVisible(true);
+    }
+
+    private static void showMainFrame() {
+        // Create the main frame
         JFrame frame = new JFrame("Rank Calculator");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 400);
@@ -81,12 +110,16 @@ public class RankCalculator {
                         // Calculate the number of games needed
                         double requiredGames = Math.ceil(requiredScore / averageScore);
 
-                        // Calculate the total time required
-                        double totalTime = requiredGames * timePerGame;
+                        // Calculate the total time required in minutes
+                        double totalTimeMinutes = requiredGames * timePerGame;
+
+                        // Convert total time to hours, rounding up if necessary
+                        double totalTimeHours = Math.ceil(totalTimeMinutes / 60);
 
                         // Display the result
                         resultLabel.setText("<html>You need to play " + (int) requiredGames + " games to reach rank " + targetRank 
-                                            + " from rank " + startingRank + ".<br>Total time required: " + totalTime + " minutes.</html>");
+                                            + " from rank " + startingRank + ".<br>Total time required: " + totalTimeMinutes 
+                                            + " minutes (" + (int) totalTimeHours + " hours).</html>");
                     }
                 } catch (NumberFormatException ex) {
                     resultLabel.setText("Please enter valid numbers.");
@@ -94,7 +127,7 @@ public class RankCalculator {
             }
         });
 
-        // Set the frame to be visible
+        // Set the main frame to be visible
         frame.setVisible(true);
     }
 }
